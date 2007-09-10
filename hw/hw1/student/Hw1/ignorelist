@@ -1,0 +1,3 @@
+configure
+libpq.rc
+freelist.c

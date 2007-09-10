@@ -1,0 +1,29 @@
+To run the provided tester
+1) run make in this directory 
+2) ./buftest
+
+The tester will do a number of operations and print the status of
+the buffers after each step. Pages are labeled with one character
+('a' through 'e'), the pound symbol, #, means a buffer is empty.
+In the readout, a letter surrounded by square brackets [] is not
+pinned in memory (available for replacement).  A letter surrounded
+by parentheses () is pinned in memory. 
+
+So,
+(d)[a][b](e)
+
+Pages, a,b,d, and e are in memory. d and e are pinned.
+
+There is no requirement that a page must be unpinned immediately
+after being read (pinned), unlike the first part of this assignment.
+
+The order, or 'slot' a particular page is in does not matter. The
+only thing that matters is after each operation the proper combo
+of pages is in memory.
+
+You are free to modify the program as you see fit. We only provide
+it to assist in debugging and as a starting point for part 3.
+
+We highly suggest not changing stubs.c. This file is provided to
+allow the code to compile without all the PostgreSQL code. Your
+code MUST compile (and run properly) with the code we provided.
