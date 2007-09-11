@@ -277,7 +277,7 @@ void
 StrategyReplaceBuffer(BufferDesc *buf, BufferTag *newTag, 
                       int cdb_found_index, int cdb_replace_index)
 {
-  Assert(found_index < 0);
+  Assert(cdb_found_index < 0);
   elog(ERROR, "StrategyReplaceBuffer: Implement me");
 }
 
