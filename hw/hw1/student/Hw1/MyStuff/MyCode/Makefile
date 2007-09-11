@@ -18,16 +18,19 @@ clean:
 	rm -rf *.o
 	rm -rf buftest
 
+# for building postgresql
+
 mypgsql: copymypgsql pgsql
 
 origpgsql: copyorigpgsql pgsql
 
 copymypgsql:
-        cp freelist.c $(HOME)/Hw1/postgresql-8.0.3/src/backend/storage/buffer/f\
+	cp freelist.c $(HOME)/Hw1/postgresql-8.0.3/src/backend/storage/buffer/f\
 reelist.c
 
 copyorigpgsql:
-        cp freelist.postgres-original.c $(HOME)/Hw1/postgresql-8.0.3/src/backen\
+	cp freelist.postgres-original.c $(HOME)/Hw1/postgresql-8.0.3/src/backen\
 d/storage/buffer/freelist.c
+
 pgsql:
-        cd $(HOME)/Hw1/postgresql-8.0.3/ && gmake && gmake install
+	cd $(HOME)/Hw1/postgresql-8.0.3/ && gmake && gmake install
