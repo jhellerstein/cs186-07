@@ -4,7 +4,7 @@
 #include "storage/buf_internals.h"
 
 extern int NBuffers;
-
+extern bool assert_enabled = true;
 
 // ****************************** 
 // src/backend/utils/error/elog.c
