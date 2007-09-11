@@ -1,10 +1,10 @@
-	Recommended Steps
-	-----------------
+        Recommended Steps
+        -----------------
 
 o Read and understand the buffer manager code.
 
-o Create your version of freelist.c
-  (for the CLOCK replacement policy) IN THIS DIRECTORY.
+o Create your version of freelist.c (for the LRUreplacement policy) IN
+  THIS DIRECTORY from freelist.skel.c.
 
 o Test whether your freelist.c compiles properly and has 
   the correct logic by making use of the buftest.c code.
@@ -17,13 +17,11 @@ o Test whether your freelist.c compiles properly and has
 
 o Now that you are sure that your freelist.c is correct,
   its time to put them in the real PostgreSQL code and 
-  perform experiments.
-
-o Use update.sh to automatically copy freelist.c into 
-  the right places in the PostgreSQL code. This will also
-  compile your code with PostgreSQL.
+  perform experiments.  To apply your changes:
+  $ cp freelist.c ~/Hw1/postgresql-8.0.3/src/backend/storage/buffer/freelist.c
+  $ cd ~/Hw1/postgresql-8.0.3/
+  $ gmake
+  $ gmake install
 
 o Use the scripts in ../PerformanceEvaluationScripts to create tables,
-  load data and run the query. 
-
-o Get the results and interpret them.
+  load data and run queries. 
