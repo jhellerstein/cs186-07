@@ -17,3 +17,9 @@ buftest: buftest.c stubs.o freelist.o
 clean:
 	rm -rf *.o
 	rm -rf buftest
+
+pgsql:
+	cp freelist.c ~/Hw1/postgresql-8.0.3/src/backend/storage/buffer/freelist.c
+	cd ~/Hw1/postgresql-8.0.3/
+	gmake
+	gmake install
