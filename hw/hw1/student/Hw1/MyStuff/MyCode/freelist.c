@@ -21,8 +21,6 @@
  *
  *-------------------------------------------------------------------------
  */
-#define USE_ASSERT_CHECKING 1
-
 #include "postgres.h"
 
 #include <time.h>
