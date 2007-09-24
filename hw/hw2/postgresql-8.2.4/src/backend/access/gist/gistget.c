@@ -214,7 +214,7 @@ gistnext_get_root(IndexScanDesc scan, GISTScanOpaque so)
  * check if a node on the (cached) search stack was split by a concurrent
  * inserter.  If so, the result of the split can be found by adding right-hand 
  * neighbors of the split node to the search stack.  See 
- * Kornacker/Mohan/Hellerstein, SIGMOD 2007, for the protocol description.
+ * Kornacker/Mohan/Hellerstein, SIGMOD 1997, for the protocol description.
  */
 static void
 gistnext_checksplit(IndexScanDesc scan, GISTScanOpaque so, Page p,
