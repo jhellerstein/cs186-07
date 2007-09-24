@@ -47,6 +47,17 @@ typedef struct GISTSearchStack
 	GistNSN		parentlsn;
 } GISTSearchStack;
 
+
+/* 
+ * GiST priority queue for search traversal.  Priority is defined by a 
+ * user-specified mindist metric.  For now, a naive linked-list 
+ * implementation, should be replaced with a smarter heap 
+*/
+typedef struct GISTPQ
+{
+  /* fill me in! */
+} GISTPQ;
+
 typedef struct GISTSTATE
 {
 	FmgrInfo	consistentFn[INDEX_MAX_KEYS];
@@ -56,6 +67,7 @@ typedef struct GISTSTATE
 	FmgrInfo	penaltyFn[INDEX_MAX_KEYS];
 	FmgrInfo	picksplitFn[INDEX_MAX_KEYS];
 	FmgrInfo	equalFn[INDEX_MAX_KEYS];
+  FmgrInfo  distanceFn[INDEX_MAX_KEYS];
 
 	TupleDesc	tupdesc;
 } GISTSTATE;
@@ -73,6 +85,7 @@ typedef struct GISTScanOpaqueData
 	MemoryContext tempCxt;
 	Buffer		curbuf;
 	Buffer		markbuf;
+	GISTPQ      *pq;
 } GISTScanOpaqueData;
 
 typedef GISTScanOpaqueData *GISTScanOpaque;
@@ -270,6 +283,10 @@ extern XLogRecPtr gistxlogInsertCompletion(RelFileNode node, ItemPointerData *ke
 /* gistget.c */
 extern Datum gistgettuple(PG_FUNCTION_ARGS);
 extern Datum gistgetmulti(PG_FUNCTION_ARGS);
+
+/* gistscan.c */
+extern void gistfreestack(GISTSearchStack *s);
+extern GISTSearchStack *gistcopystack(GISTSearchStack *s);
 
 /* gistutil.c */
 

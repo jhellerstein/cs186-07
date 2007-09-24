@@ -171,6 +171,7 @@ DATA(insert (	2593	0 4 2580 ));
 DATA(insert (	2593	0 5 2581 ));
 DATA(insert (	2593	0 6 2582 ));
 DATA(insert (	2593	0 7 2584 ));
+DATA(insert (	2593	0 8 2893 ));
 DATA(insert (	2594	0 1 2585 ));
 DATA(insert (	2594	0 2 2583 ));
 DATA(insert (	2594	0 3 2586 ));
@@ -178,6 +179,7 @@ DATA(insert (	2594	0 4 2580 ));
 DATA(insert (	2594	0 5 2581 ));
 DATA(insert (	2594	0 6 2582 ));
 DATA(insert (	2594	0 7 2584 ));
+DATA(insert (	2594	0 8 2895 ));
 DATA(insert (	2595	0 1 2591 ));
 DATA(insert (	2595	0 2 2583 ));
 DATA(insert (	2595	0 3 2592 ));
@@ -185,6 +187,7 @@ DATA(insert (	2595	0 4 2580 ));
 DATA(insert (	2595	0 5 2581 ));
 DATA(insert (	2595	0 6 2582 ));
 DATA(insert (	2595	0 7 2584 ));
+DATA(insert (	2595	0 8 2895 ));
 
 /* gin */
 DATA(insert (	2745	0 1  351 ));

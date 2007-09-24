@@ -19,8 +19,6 @@
 #include "access/gistscan.h"
 #include "utils/memutils.h"
 
-static void gistfreestack(GISTSearchStack *s);
-
 Datum
 gistbeginscan(PG_FUNCTION_ARGS)
 {
@@ -226,7 +224,7 @@ gistendscan(PG_FUNCTION_ARGS)
 	PG_RETURN_VOID();
 }
 
-static void
+void
 gistfreestack(GISTSearchStack *s)
 {
 	while (s != NULL)
@@ -236,4 +234,18 @@ gistfreestack(GISTSearchStack *s)
 		pfree(s);
 		s = p;
 	}
+}
+
+GISTSearchStack * 
+gistcopystack(GISTSearchStack *s)
+{
+  GISTSearchStack *newstk = NULL;
+  
+  if (s != NULL)
+  {
+	newstk = (GISTSearchStack *)palloc(sizeof(GISTSearchStack));
+    memcpy(newstk, s, sizeof(GISTSearchStack));
+    newstk->next = gistcopystack(s->next);
+  }
+  return newstk;
 }

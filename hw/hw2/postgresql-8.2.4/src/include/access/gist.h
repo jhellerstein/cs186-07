@@ -32,7 +32,8 @@
 #define GIST_PENALTY_PROC				5
 #define GIST_PICKSPLIT_PROC				6
 #define GIST_EQUAL_PROC					7
-#define GISTNProcs						7
+#define GIST_DISTANCE_PROC      8
+#define GISTNProcs						8
 
 /*
  * strategy numbers for GiST opclasses that want to implement the old

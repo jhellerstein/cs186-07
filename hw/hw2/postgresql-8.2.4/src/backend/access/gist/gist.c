@@ -1064,6 +1064,9 @@ initGISTstate(GISTSTATE *giststate, Relation index)
 		fmgr_info_copy(&(giststate->equalFn[i]),
 					   index_getprocinfo(index, i + 1, GIST_EQUAL_PROC),
 					   CurrentMemoryContext);
+		fmgr_info_copy(&(giststate->distanceFn[i]),
+					   index_getprocinfo(index, i + 1, GIST_DISTANCE_PROC),
+					   CurrentMemoryContext);
 	}
 }
 
