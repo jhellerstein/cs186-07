@@ -522,7 +522,7 @@ gistindex_keydistance(  IndexTuple tuple,
             IndexScanDesc scan,
             OffsetNumber offset)
 {
-  /* fill me in! */
+  /* CS186 HW2: fill me in! */
   return get_float8_infinity();
 }
 
