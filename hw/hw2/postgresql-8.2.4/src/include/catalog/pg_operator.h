@@ -903,6 +903,8 @@ DATA(insert OID = 2875 (  "@"	   PGNSP PGUID b f 601 628 16	  0  0 0 0 0 0 on_sl
 DATA(insert OID = 2876 (  "@"	   PGNSP PGUID b f 601 603 16	  0  0 0 0 0 0 on_sb - - ));
 DATA(insert OID = 2877 (  "~"	   PGNSP PGUID b f 1034 1033	 16 0 0 0 0 0 0 aclcontains - - ));
 
+/* mindist function for near-neighbor search on boxes */
+DATA(insert OID = 2880 (  "~~"	   PGNSP PGUID b f 603 603	16	 0	 0	 0	 0	 0	 0 box_mindistance positionsel positionjoinsel ));
 
 /*
  * function prototypes

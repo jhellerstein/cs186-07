@@ -19,6 +19,7 @@
 #include "access/gist.h"
 #include "access/skey.h"
 #include "utils/geo_decls.h"
+#include "utils/builtins.h"
 
 
 typedef struct
@@ -109,6 +110,31 @@ gist_box_consistent(PG_FUNCTION_ARGS)
 		PG_RETURN_BOOL(rtree_internal_consistent(DatumGetBoxP(entry->key),
 												 query,
 												 strategy));
+}
+
+/*
+ * The GiST MinDist method for boxes
+ *
+ */
+Datum
+gist_box_mindistance(PG_FUNCTION_ARGS)
+{
+	GISTENTRY  *entry = (GISTENTRY *) PG_GETARG_POINTER(0);
+	BOX		   *query = PG_GETARG_BOX_P(1);
+	double     d;
+
+	if (DatumGetBoxP(entry->key) == NULL || query == NULL) {
+	  d = get_float8_infinity();
+	  PG_RETURN_FLOAT8(d);
+	}
+	d = box_mindist_internal(DatumGetBoxP(entry->key), query);
+	PG_RETURN_FLOAT8(d);
+}
+
+Datum gist_infinite_mindistance(PG_FUNCTION_ARGS)
+{
+  double d = get_float8_infinity();
+  PG_RETURN_FLOAT8(d);  
 }
 
 static void

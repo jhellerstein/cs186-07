@@ -309,6 +309,8 @@ extern Datum box_add(PG_FUNCTION_ARGS);
 extern Datum box_sub(PG_FUNCTION_ARGS);
 extern Datum box_mul(PG_FUNCTION_ARGS);
 extern Datum box_div(PG_FUNCTION_ARGS);
+extern Datum box_mindistance(PG_FUNCTION_ARGS);
+extern double box_mindist_internal(BOX *box1, BOX *box2);
 
 /* public path routines */
 extern Datum path_area(PG_FUNCTION_ARGS);
@@ -420,6 +422,8 @@ extern Datum gist_poly_compress(PG_FUNCTION_ARGS);
 extern Datum gist_poly_consistent(PG_FUNCTION_ARGS);
 extern Datum gist_circle_compress(PG_FUNCTION_ARGS);
 extern Datum gist_circle_consistent(PG_FUNCTION_ARGS);
+extern Datum gist_box_mindistance(PG_FUNCTION_ARGS);
+extern Datum gist_infinite_mindistance(PG_FUNCTION_ARGS);
 
 /* geo_selfuncs.c */
 extern Datum areasel(PG_FUNCTION_ARGS);

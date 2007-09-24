@@ -3973,6 +3973,12 @@ DATA(insert OID = 2891 (  pg_advisory_unlock_shared		PGNSP PGUID 12 f f t f v 2 
 DESCR("release shared advisory lock");
 DATA(insert OID = 2892 (  pg_advisory_unlock_all		PGNSP PGUID 12 f f t f v 0 2278 "" _null_ _null_ _null_ pg_advisory_unlock_all - _null_ ));
 DESCR("release all advisory locks");
+DATA(insert OID = 2893 (  gist_box_mindistance	   PGNSP PGUID 12 f f t f i 2 701 "2281 603" _null_ _null_ _null_	gist_box_mindistance - _null_ ));
+DESCR("gist support");
+DATA(insert OID = 2894 (  box_mindistance	   PGNSP PGUID 12 f f t f i 2 701 "603 603" _null_ _null_ _null_	box_mindistance - _null_ ));
+DESCR("bounding box minimum distance metric for gist NN search");
+DATA(insert OID = 2895 (  gist_infinite_mindistance	   PGNSP PGUID 12 f f t f i 2 701 "2281 603" _null_ _null_ _null_	gist_infinite_mindistance - _null_ ));
+DESCR("gist support");
 
 /*
  * Symbolic values for provolatile column: these indicate whether the result
