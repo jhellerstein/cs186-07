@@ -203,7 +203,6 @@ gistnext_get_root(IndexScanDesc scan, GISTScanOpaque so)
   so->curbuf = ReadBuffer(scan->indexRelation, GIST_ROOT_BLKNO);
 
   stk = so->stack = (GISTSearchStack *) palloc0(sizeof(GISTSearchStack));
-  pq = so->pq = (GISTPQ *) palloc0(sizeof(GISTPQ));
 
   stk->next = NULL;
 
