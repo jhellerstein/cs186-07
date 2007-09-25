@@ -67,7 +67,6 @@ static double dist_pl_internal(Point *pt, LINE *line);
 static double dist_ps_internal(Point *pt, LSEG *lseg);
 static Point *line_interpt_internal(LINE *l1, LINE *l2);
 
-
 /*
  * Delimiters for input and output strings.
  * LDELIM, RDELIM, and DELIM are left, right, and separator delimiters, respectively.
@@ -808,6 +807,16 @@ box_height(PG_FUNCTION_ARGS)
 	PG_RETURN_FLOAT8(box->high.y - box->low.y);
 }
 
+double box_distance_internal(BOX *box1, BOX *box2)
+{
+  Point		a,
+				b;
+
+	box_cn(&a, box1);
+	box_cn(&b, box2);
+  return(HYPOT(a.x - b.x, a.y - b.y));
+	
+}
 
 /*		box_distance	-		returns the distance between the
  *								  center points of two boxes.
@@ -817,13 +826,9 @@ box_distance(PG_FUNCTION_ARGS)
 {
 	BOX		   *box1 = PG_GETARG_BOX_P(0);
 	BOX		   *box2 = PG_GETARG_BOX_P(1);
-	Point		a,
-				b;
+  double   result = box_distance_internal(box1, box2);
 
-	box_cn(&a, box1);
-	box_cn(&b, box2);
-
-	PG_RETURN_FLOAT8(HYPOT(a.x - b.x, a.y - b.y));
+	PG_RETURN_FLOAT8(result);
 }
 
 
@@ -5246,4 +5251,22 @@ plist_same(int npts, Point *p1, Point *p2)
 	}
 
 	return FALSE;
+}
+
+double box_mindist_internal(BOX *box1, BOX *box2)
+{
+  /* CS186 HW2: fill me in! */
+}
+
+Datum box_mindistance(PG_FUNCTION_ARGS)
+{
+	BOX	       *box1 = PG_GETARG_BOX_P(0);
+	BOX	       *box2 = PG_GETARG_BOX_P(1);
+	
+	PG_RETURN_FLOAT8(box_mindist_internal(box1, box2));
+}
+
+Datum box_true(PG_FUNCTION_ARGS)
+{
+	PG_RETURN_BOOL(TRUE);
 }

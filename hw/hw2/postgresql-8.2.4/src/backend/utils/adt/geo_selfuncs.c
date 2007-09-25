@@ -93,3 +93,10 @@ contjoinsel(PG_FUNCTION_ARGS)
 {
 	PG_RETURN_FLOAT8(0.001);
 }
+
+/* useful for near-neighbor predicates */
+Datum
+zerosel(PG_FUNCTION_ARGS)
+{
+	PG_RETURN_FLOAT8(0);
+}
