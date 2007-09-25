@@ -53,6 +53,7 @@
 #define RTOverAboveStrategyNumber		12
 #define RTOldContainsStrategyNumber		13		/* for old spelling of @> */
 #define RTOldContainedByStrategyNumber	14		/* for old spelling of <@ */
+#define RTNearNeighborStrategyNumber 15 /* for ~~ */
 
 /*
  * Page opaque data in a GiST index page.

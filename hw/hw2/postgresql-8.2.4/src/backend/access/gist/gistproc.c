@@ -612,6 +612,9 @@ gist_box_leaf_consistent(BOX *key, BOX *query, StrategyNumber strategy)
 													  PointerGetDatum(key),
 													PointerGetDatum(query)));
 			break;
+		case RTNearNeighborStrategyNumber:
+			retval = TRUE;
+			break;
 		default:
 			retval = FALSE;
 	}
@@ -702,6 +705,9 @@ rtree_internal_consistent(BOX *key, BOX *query, StrategyNumber strategy)
 			retval = !DatumGetBool(DirectFunctionCall2(box_below,
 													   PointerGetDatum(key),
 													PointerGetDatum(query)));
+			break;
+		case RTNearNeighborStrategyNumber:
+			retval = TRUE;
 			break;
 		default:
 			retval = FALSE;
