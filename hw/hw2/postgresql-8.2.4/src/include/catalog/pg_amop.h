@@ -613,6 +613,7 @@ DATA(insert (	2593	0 11 f	2573 ));
 DATA(insert (	2593	0 12 f	2572 ));
 DATA(insert (	2593	0 13 f	2863 ));
 DATA(insert (	2593	0 14 f	2862 ));
+DATA(insert (	2593	0 15 f	2880 ));
 
 /*
  *	gist poly_ops (supports polygons)

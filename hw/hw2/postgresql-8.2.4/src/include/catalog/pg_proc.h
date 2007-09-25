@@ -3979,6 +3979,10 @@ DATA(insert OID = 2894 (  box_mindistance	   PGNSP PGUID 12 f f t f i 2 701 "603
 DESCR("bounding box minimum distance metric for gist NN search");
 DATA(insert OID = 2895 (  gist_infinite_mindistance	   PGNSP PGUID 12 f f t f i 2 701 "2281 603" _null_ _null_ _null_	gist_infinite_mindistance - _null_ ));
 DESCR("gist support");
+DATA(insert OID = 2896 (  box_true	   PGNSP PGUID 12 f f t f i 2 701 "603 603" _null_ _null_ _null_	box_true - _null_ ));
+DESCR("gist NN support");
+DATA(insert OID = 2897 (  truesel		   PGNSP PGUID 12 f f t f s 4 701 "2281 26 2281 23" _null_ _null_ _null_	truesel - _null_ ));
+DESCR("gist NN support");
 
 /*
  * Symbolic values for provolatile column: these indicate whether the result
