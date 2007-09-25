@@ -198,7 +198,6 @@ gistnext_get_root(IndexScanDesc scan, GISTScanOpaque so)
   /* Being asked to fetch the first entry, so start at the root */
   Assert(so->curbuf == InvalidBuffer);
   Assert(so->stack == NULL);
-  Assert(so->pq == NULL);
 
   so->curbuf = ReadBuffer(scan->indexRelation, GIST_ROOT_BLKNO);
 
