@@ -434,6 +434,6 @@ extern Datum positionsel(PG_FUNCTION_ARGS);
 extern Datum positionjoinsel(PG_FUNCTION_ARGS);
 extern Datum contsel(PG_FUNCTION_ARGS);
 extern Datum contjoinsel(PG_FUNCTION_ARGS);
-extern Datum truesel(PG_FUNCTION_ARGS);
+extern Datum zerosel(PG_FUNCTION_ARGS);
 
 #endif   /* GEO_DECLS_H */

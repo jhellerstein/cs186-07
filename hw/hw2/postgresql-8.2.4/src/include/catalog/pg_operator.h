@@ -904,7 +904,7 @@ DATA(insert OID = 2876 (  "@"	   PGNSP PGUID b f 601 603 16	  0  0 0 0 0 0 on_sb
 DATA(insert OID = 2877 (  "~"	   PGNSP PGUID b f 1034 1033	 16 0 0 0 0 0 0 aclcontains - - ));
 
 /* truth predicate for near-neighbor search */
-DATA(insert OID = 2880 (  "~~"	   PGNSP PGUID b f 603 603	16	 0	 0	 0	 0	 0	 0 box_true truesel truesel ));
+DATA(insert OID = 2880 (  "~~"	   PGNSP PGUID b f 603 603	16	 0	 0	 0	 0	 0	 0 box_true zerosel zerosel ));
 
 /*
  * function prototypes
