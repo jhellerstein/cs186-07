@@ -1,0 +1,3 @@
+* gistget.c is a copy of ../postgresql-8.2.4/src/backend/access/gist/gistget.c
+* geo_ops.c is a copy of ../postgresql-8.2.4/src/backend/utils/adt/geo_ops.c
+
