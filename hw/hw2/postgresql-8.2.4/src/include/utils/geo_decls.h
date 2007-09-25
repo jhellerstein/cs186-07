@@ -310,6 +310,7 @@ extern Datum box_sub(PG_FUNCTION_ARGS);
 extern Datum box_mul(PG_FUNCTION_ARGS);
 extern Datum box_div(PG_FUNCTION_ARGS);
 extern Datum box_mindistance(PG_FUNCTION_ARGS);
+extern double box_distance_internal(BOX *box1, BOX *box2);
 extern double box_mindist_internal(BOX *box1, BOX *box2);
 extern Datum box_true(PG_FUNCTION_ARGS);
 

@@ -127,7 +127,14 @@ gist_box_mindistance(PG_FUNCTION_ARGS)
 	  d = get_float8_infinity();
 	  PG_RETURN_FLOAT8(d);
 	}
-	d = box_mindist_internal(DatumGetBoxP(entry->key), query);
+	/*
+	 * if entry is not leaf, use box_mindist_internal, else use
+	 * box_distance_internal
+	 */
+  if (GIST_LEAF(entry))
+    d = box_distance_internal(DatumGetBoxP(entry->key), query);
+	else
+	  d = box_mindist_internal(DatumGetBoxP(entry->key), query);
 	PG_RETURN_FLOAT8(d);
 }
 
