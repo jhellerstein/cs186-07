@@ -198,7 +198,6 @@ gistnext_get_root(IndexScanDesc scan, GISTScanOpaque so)
   /* Being asked to fetch the first entry, so start at the root */
   Assert(so->curbuf == InvalidBuffer);
   Assert(so->stack == NULL);
-  Assert(so->pq == NULL);
 
   so->curbuf = ReadBuffer(scan->indexRelation, GIST_ROOT_BLKNO);
 
@@ -209,12 +208,13 @@ gistnext_get_root(IndexScanDesc scan, GISTScanOpaque so)
   pgstat_count_index_scan(&scan->xs_pgstat_info);
 }
 
-/* 
- * Support routine for gistnext.  Deals with concurrency control issues to 
- * check if a node on the (cached) search stack was split by a concurrent
- * inserter.  If so, the result of the split can be found by adding right-hand 
- * neighbors of the split node to the search stack.  See 
- * Kornacker/Mohan/Hellerstein, SIGMOD 1997, for the protocol description.
+/*
+ * Support routine for gistnext.  Deals with concurrency control issues to
+ * check if the top node on the search stack was split by a concurrent
+ * inserter since the time it was put on the stack.  If so, the "rest"
+ * of the split can be found by adding the right-hand
+ * neighbor of the split node to the search stack.  See
+ * Kornacker/Mohan/Hellerstein, SIGMOD 1997, for details.
  */
 static void
 gistnext_checksplit(IndexScanDesc scan, GISTScanOpaque so, Page p,
@@ -238,6 +238,14 @@ gistnext_checksplit(IndexScanDesc scan, GISTScanOpaque so, Page p,
     {
       /* detect page split, follow right link to add pages */
 
+      /* 
+       * CS186 HW2: Fix me!
+       * Modify this next code to put the rightlinked block on
+       * the priority queue.
+       * Note: since this page was split since it was inserted into
+       * the priority queue, it has fewer items on it, and a different
+       * bounding box, so its priority may have changed.
+       */
       stk = (GISTSearchStack *) palloc0(sizeof(GISTSearchStack));
       stk->next = so->stack->next;
       stk->block = opaque->rightlink;
