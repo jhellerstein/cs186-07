@@ -530,8 +530,63 @@ gistindex_keydistance(  IndexTuple tuple,
             IndexScanDesc scan,
             OffsetNumber offset)
 {
-  /* CS186 HW2: fill me in! */
-  return get_float8_infinity();
+  int      keySize = scan->numberOfKeys;
+  ScanKey    key = scan->keyData;
+  Relation  r = scan->indexRelation;
+  GISTScanOpaque so;
+  Page    p;
+  GISTSTATE  *giststate;
+  double retval = 0;
+  
+  so = (GISTScanOpaque) scan->opaque;
+  giststate = so->giststate;
+  p = BufferGetPage(so->curbuf);
+
+  while (keySize > 0)
+  {
+    Datum    datum;
+    bool    isNull;
+    Datum    test;
+    GISTENTRY  de;
+
+    datum = index_getattr(tuple,
+                key->sk_attno,
+                giststate->tupdesc,
+                &isNull);
+
+    if (key->sk_flags & SK_ISNULL)
+    {
+      /*
+       * is the compared-to datum NULL? on non-leaf page it's possible
+       * to have nulls in childs :(
+       */
+
+      if (isNull || !GistPageIsLeaf(p))
+        return get_float8_infinity();
+      return 0;
+    }
+    else if (isNull)
+      return 0;
+
+    gistdentryinit(giststate, key->sk_attno - 1, &de,
+             datum, r, p, offset,
+             FALSE, isNull);
+
+    /*
+     * Call the Distance function to evaluate the test.  The arguments
+     * are the index datum (as a GISTENTRY*), and the comparison datum.
+     */
+    test = FunctionCall2(&giststate->distanceFn[key->sk_attno - 1],
+               PointerGetDatum(&de),
+               key->sk_argument);
+
+    retval += DatumGetFloat8(test);
+
+    keySize--;
+    key++;
+  }
+
+  return retval;
 }
 
 /*
