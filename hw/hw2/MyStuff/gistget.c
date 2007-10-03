@@ -142,14 +142,25 @@ gistgetmulti(PG_FUNCTION_ARGS)
 
 /* insert a new priority queue entry into so->pq */
 static void
-gist_pq_insertpq(GISTScanOpaque so, GISTPQ *newpq)
+gist_pq_insertpq(GISTScanOpaque so, /* State of a GiST scan */
+                 GISTPQ *newpq /* a new GISTPQ entry */
+                 )
 {
   /* CS186 HW2: fill me in! */
 }
 
 /* 
  * given the current state of the index scan, generate a GISTPQ to insert into
- * the priority queue, and insert it.
+ * the priority queue, and insert it. Note that the "stack" holds the blocks
+ * from the root to the current item.
+ * There are two cases to consider: 
+ *   1) the item being inserted is an entry in a leaf node, identified by a
+ *      block number (from the stack), and the offset.  It points to a data
+ *      item in the database (isdata == true).
+ *   2) the item being inserted is the block number of an index node to 
+ *      be visited next (isdata == false).  The key corresponding to this 
+ *      block number is in the block's *parent* in the tree (which can be
+ *      found in the stack) at the given offset.
  */
 static void
 gist_pq_insert(IndexScanDesc scan, /* scan descriptor */
