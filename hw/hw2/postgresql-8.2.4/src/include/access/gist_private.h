@@ -55,7 +55,7 @@ typedef struct GISTSearchStack
 */
 typedef struct GISTPQ
 {
-  /* fill me in! */
+  /* CS186 HW2: fill me in! */
 } GISTPQ;
 
 typedef struct GISTSTATE
