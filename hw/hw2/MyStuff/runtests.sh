@@ -1,5 +1,9 @@
 #!/bin/csh
 
+# restart server so that it chooses index scan over heap scan 
+pg_ctl restart -o "-fs -fb"
+sleep 5
+
 ####
 #### configuration
 ####
