@@ -6,19 +6,18 @@ drop table if exists testscan;
 drop table if exists testgist25;
 drop table if exists testscan25;
 create table testgist(id integer, the_box box);
-copy testgist from '/Users/joeh/devel/hw2/MyStuff/randomboxes' delimiter ';' ;
+copy testgist from '/home/cc/cs186/fa07/class/cs186-ee/Hw2/MyStuff/randomboxes' delimiter ';' ;
 create index testgistix on testgist using gist (the_box box_ops);
 
 create table testscan(id integer, the_box box);
-copy testscan from '/Users/joeh/devel/hw2/MyStuff/randomboxes' delimiter ';' ;
+copy testscan from '/home/cc/cs186/fa07/class/cs186-ee/Hw2/MyStuff/randomboxes' delimiter ';' ;
 
 create table testgist25 (id integer, the_box box);
-copy testgist25 from '/Users/joeh/devel/hw2/MyStuff/randomboxes25' delimiter ';' ;
+copy testgist25 from '/home/cc/cs186/fa07/class/cs186-ee/Hw2/MyStuff/randomboxes25' delimiter ';' ;
 create index testgist25ix on testgist25 using gist (the_box box_ops);
 
 create table testscan25(id integer, the_box box);
-copy testscan25 from '/Users/joeh/devel/hw2/MyStuff/randomboxes25' delimiter ';' ;
-
+copy testscan25 from '/home/cc/cs186/fa07/class/cs186-ee/Hw2/MyStuff/randomboxes25' delimiter ';' ;
 
 --
 -- Run queries
@@ -29,6 +28,8 @@ copy testscan25 from '/Users/joeh/devel/hw2/MyStuff/randomboxes25' delimiter ';'
 --
 -- SeqScan: 
 set enable_seqscan to off;
+set enable_bitmapscan to off;
+
 \o runtests.out/1
 select id, box_mindistance(the_box, '(0.5,0.5,0.5,0.5)') as dist from testscan25 where the_box ~~ '(0.5,0.5,0.5,0.5)' and box_mindistance(the_box, '(0.5,0.5,0.5,0.5)') > 0 order by dist;
 -- index
