@@ -227,7 +227,7 @@ gistnext_get_root(IndexScanDesc scan, GISTScanOpaque so)
  * neighbor of the split node to the search stack.  See
  * Kornacker/Mohan/Hellerstein, SIGMOD 1997, for details.
  */
-static void
+static bool
 gistnext_checksplit(IndexScanDesc scan, GISTScanOpaque so, Page p,
                     GISTPageOpaque opaque)
 {
@@ -265,6 +265,7 @@ gistnext_checksplit(IndexScanDesc scan, GISTScanOpaque so, Page p,
       so->stack->next = stk;
     }
   }
+  return resetoffset;
 }
 
 /*
@@ -309,10 +310,9 @@ gistnext(IndexScanDesc scan, ScanDirection dir, ItemPointer tids, int maxtids, b
     gistcheckpage(scan->indexRelation, so->curbuf);
     p = BufferGetPage(so->curbuf);
     opaque = GistPageGetOpaque(p);
-    resetoffset = false;
 
     /* deal with case where this page split since last we saw it */
-    gistnext_checksplit(scan, so, p, opaque);
+    resetoffset = gistnext_checksplit(scan, so, p, opaque);
 
     /* if page is empty, then just skip it */
     if (PageIsEmpty(p))
