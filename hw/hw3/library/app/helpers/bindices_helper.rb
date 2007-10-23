@@ -1,0 +1,2 @@
+module BindicesHelper
+end
