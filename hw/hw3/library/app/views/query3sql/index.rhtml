@@ -1,0 +1,36 @@
+<h1> Query 3</h1>
+
+Print the title of all autobiographies (subject=authorname) that they can be
+found in a library located in the city where the author was born.
+
+<h3>Ruby Code</h3>
+<pre>
+      @results = Array.new
+      books = Book.find(:all) 
+      books.each do |book|
+         found = Bindex.count :conditions => "isbn='#{book.isbn}' and
+            subject='#{book.author}'"
+         if found == 1
+               bplace = Author.find(:first, :conditions => "name =
+                 '#{book.author}'")
+            libraries = Library.find(:first, :conditions => "city='#{bplace}'")
+            libraries.each do |library|
+               book_exists = Instock.count :conditions => "isbn='#{book.isbn}' and
+                  lname='#{library.lname}'"
+               if book_exists > 0
+                  @results << book.title
+               end
+           end
+         end
+      end
+</pre>
+
+<h3>Result</h3>
+
+<table border=1>
+<tr><td><b>Name</b></td></tr>
+<% for result in @results -%>
+<tr><td><%= result.title %></td></tr>
+<% end %>
+</table>
+
