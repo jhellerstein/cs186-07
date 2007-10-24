@@ -1,3 +1,3 @@
 class LibrariesController < ApplicationController
-   scaffold :book
+   scaffold :library
 end
