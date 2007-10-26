@@ -1,0 +1,29 @@
+To run the tests, make sure you have postmaster running (e.g., via
+'pg_ctl start') and that you have run 'createdb' to generate a database.
+Then, in this directory type: 
+
+	% ./runme.sh
+
+You will see a list of all tests that you failed.
+
+Points were as follows:
+
+    Buffer leak failure: 0.5 points
+    Buffer lock failure: 0.5 points
+    mmgr failure: 1 point
+    Distance Function failure: 1 point
+    One-Page failure: 1 point
+    Near-Neighbor failure: 5 points
+    Selection failure: 1 point
+
+If your code did not compile, or crashed before executing any tests, you
+did not receive any points.  If your code passed some tests and then
+crashed, you received points for the tests you passed.
+
+Note: During grading, the tests for One-Page, Near-Neighbor and
+Selection were rerun manually with the geo_ops_master.c file; if you
+did better with geo_ops_master.c you were given credit for those
+tests.  
+
+
+
