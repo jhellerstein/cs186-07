@@ -15,6 +15,7 @@ Points were as follows:
     One-Page failure: 1 point
     Near-Neighbor failure: 5 points
     Selection failure: 1 point
+    Rectangle failure: 0 points
 
 If your code did not compile, or crashed before executing any tests, you
 did not receive any points.  If your code passed some tests and then
