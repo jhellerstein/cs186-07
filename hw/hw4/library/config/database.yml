@@ -1,0 +1,20 @@
+ # CS186 Fall 2007 format
+ development:
+   adapter: postgresql
+   database: hw3
+   username: <%= ENV[ 'USER' ] %>
+   port: <%= ENV[ 'PGPORT' ] %>
+   password:
+   host: rhombus.cs.berkeley.edu
+
+ # Warning: The database defined as 'test' will be erased and
+ # re-generated from your development database when you run 'rake'.
+ # Do not set this db to the same as development or production.
+
+ test:
+   <<: *login
+   database: hw3_test
+
+ production:
+   <<: *login
+   database: hw3_prod
