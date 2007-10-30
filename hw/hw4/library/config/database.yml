@@ -1,7 +1,7 @@
  # CS186 Fall 2007 format
  development:
    adapter: postgresql
-   database: hw3
+   database: hw4
    username: <%= ENV[ 'USER' ] %>
    port: <%= ENV[ 'PGPORT' ] %>
    password:
@@ -13,8 +13,8 @@
 
  test:
    <<: *login
-   database: hw3_test
+   database: hw4_test
 
  production:
    <<: *login
-   database: hw3_prod
+   database: hw4_prod
