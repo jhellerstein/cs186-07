@@ -19,7 +19,7 @@ if (`grep "\*\*\*" compile.out` != "") then
   echo "XXXX COMPILATION ERROR"
   exit 1
 endif
-$HOME/Hw2/pgsql/bin/pg_ctl restart -l ./pglog -o "-fs -fb" >&! /dev/null
+$HOME/pgsql/bin/pg_ctl restart -l ./pglog -o "-fs -fb" >&! /dev/null
 popd
 sleep 2
 ./maintests.sh >&! main.out
