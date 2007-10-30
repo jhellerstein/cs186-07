@@ -1,0 +1,43 @@
+<h1> Query 4</h1>
+
+For each author that has talked in his books about at least two different
+subjects (in the same or in different books), print his name and the titles
+of all his books that can be found in 'Rabin Library'.
+
+<h3>Ruby Code</h3>
+<pre>
+@results = Array.new
+authors = Author.find(:all)
+authors.each do |author|
+   booksWrittenByAuth = Book.find(:all, :conditions =>
+      "author='#{author.name}'")
+      subjects_written = Hash.new
+
+      booksWrittenByAuth.each do |book|
+         subjects = Bindex.find(:all, :conditions => "isbn='#{book.isbn}'")
+         subjects.each do |different_subject|
+            subjects_written[different_subject.subject] = '1'
+         end
+      end   
+      
+      if subjects_written.length > 1
+         books_in_Rabin = Instock.find(:all, :conditions => "lname='Rabin Library'")
+         books_in_Rabin.each do |book_in_Rabin|
+            author2 = Book.find(:first, :conditions =>
+               "isbn='#{book_in_Rabin.isbn}' and author='#{author.name}'")
+            if author2 != nil
+               @results << "#{author.name}, #{author2.title}"
+            end
+         end   
+   end
+end   
+</pre>
+
+<h3>Result</h3>
+<table border=1>
+<tr><td><b>Name, Title</b></td></tr>
+<% for result in @results -%>
+<tr><td><%= result %></td></tr>
+<% end %>
+</table>
+

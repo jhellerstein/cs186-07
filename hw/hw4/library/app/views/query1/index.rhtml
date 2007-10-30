@@ -1,0 +1,41 @@
+<html><head><title>Inspirational Libraries</title>
+<%= GMap.header %>
+<%= @map.to_html %>
+</head><body>
+
+<h1>Inspirational Libraries</h1>
+
+<i>
+The map below shows birthplaces of authors relative to a particular library.  On the side bar to the right, authors have been sorted by their bithplaces' distance to the library.  Notice the "Elapsed Time" below.  Your job is to speed up this elapsed time by building a cache for the queries involving distances of authors' birthplaces to libraries.
+</i>
+
+<table>
+<tr>
+<!-- main map -->
+<td>
+<%= @map.div(:width => 600, :height => 400) %>
+</td>
+<td>
+&nbsp;&nbsp;
+</td>
+<!-- side bar -->
+<td>
+<h3><%= @mylibrary.lname %> in <%= @mylibrary.city %></h3>
+<table border=1>
+<tr><td><b>Author</b></td><td><b>Birthplace</b></td><td><b>Distance</b></td></tr>
+<% for author in @authors -%>
+<tr><td><%= author[0] %></td><td><%= author[1] %></td><td><%= author[2] %></td></tr>
+<% end %>
+</table>
+</td>
+</tr>
+</table>
+
+<% form_for :changelibrary, :url => { :action => :index } do |form| %>
+<%= form.select :newlibrary, @alllibraries, :prompt => "-- Library Name --" %>
+<%= submit_tag "Switch Library", :class => "submit" %>
+<% end %>
+	
+Elapsed Time: <%= @elapsedtime %> Seconds.
+
+</body></html>
