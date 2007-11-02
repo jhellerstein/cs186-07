@@ -24,7 +24,7 @@ popd
 sleep 2
 ./maintests.sh >&! main.out
 echo "== Failed Tests Listed Below =="
-cat mem.out
+if ( `grep mmgr runtests.out/mem` != '' || `grep mmgr mem.out` != '') echo 'mmgr failure'
 cat main.out
 echo
 endif
