@@ -1,6 +1,6 @@
 require 'ym4r/google_maps/geocoding'
 
-class Query1Controller < ApplicationController
+class LibrarymapsController < ApplicationController
   def index
     # Start timekeeping
     starttime = Time.now
