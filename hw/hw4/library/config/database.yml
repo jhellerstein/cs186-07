@@ -1,11 +1,14 @@
  # CS186 Fall 2007 format
- development:
+ login: &login
    adapter: postgresql
-   database: hw4
    username: <%= ENV[ 'USER' ] %>
    port: <%= ENV[ 'PGPORT' ] %>
    password:
    host: rhombus.cs.berkeley.edu
+
+ development:
+   <<: *login
+   database: hw4
 
  # Warning: The database defined as 'test' will be erased and
  # re-generated from your development database when you run 'rake'.
