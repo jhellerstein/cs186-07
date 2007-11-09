@@ -12,7 +12,18 @@ class LibrarymapsControllerTest < Test::Unit::TestCase
   end
 
   # Replace this with your real tests.
-  def test_truth
-    assert true
+  def test_index
+    get :index, :changelibrary => {:newlibrary=>'Gustav Library'}
+    assert_response :success 
+  end
+
+  def test_bad_geoloc
+    l = Library.new
+    l.city = "Hellerstein"
+    l.lname = "Nothing Library"
+    l.save
+    assert_raises(RuntimeError) do
+      get :index, :changelibrary => {:newlibrary=>'Nothing Library'}
+    end
   end
 end

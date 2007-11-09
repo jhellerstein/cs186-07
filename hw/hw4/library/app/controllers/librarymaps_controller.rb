@@ -35,7 +35,7 @@ class LibrarymapsController < ApplicationController
     geoloc = Ym4r::GoogleMaps::Geocoding::get(@mylibrary.city)
     if geoloc.status != Geocoding::GEO_SUCCESS
       err = 'Library Coordinates Not Found'
-      return err
+      raise err
     end
     liblatlon = geoloc[0].latlon
 
@@ -116,30 +116,30 @@ def distance_between(from, to, options={})
 #  units = options[:units] || GeoKit::default_units 
 #  formula = options[:formula] || GeoKit::default_formula
   units = :miles
-  formula = :sphere
-  case formula
-  when :sphere          
+#  formula = :sphere
+#  case formula
+#  when :sphere          
     units_sphere_multiplier(units) * 
       Math.acos( Math.sin(deg2rad(from[0])) * Math.sin(deg2rad(to[0])) + 
                  Math.cos(deg2rad(from[0])) * Math.cos(deg2rad(to[0])) * 
                  Math.cos(deg2rad(to[1]) - deg2rad(from[1])))   
-  when :flat
-    Math.sqrt((units_per_latitude_degree(units)*(from[0]-to[0]))**2 + 
-              (units_per_longitude_degree(from[0], units)*(from[1]-to[1]))**2)
-  end
+#  when :flat
+#    Math.sqrt((units_per_latitude_degree(units)*(from[0]-to[0]))**2 + 
+#              (units_per_longitude_degree(from[0], units)*(from[1]-to[1]))**2)
+#  end
 end
 
 def deg2rad(degrees)
   degrees.to_f / 180.0 * Math::PI
 end
 
-def rad2deg(rad)
-  rad.to_f * 180.0 / Math::PI 
-end
+# def rad2deg(rad)
+#  rad.to_f * 180.0 / Math::PI 
+# end
 
-def to_heading(rad)
-  (rad2deg(rad)+360)%360
-end
+# def to_heading(rad)
+#  (rad2deg(rad)+360)%360
+# end
 
 # Returns the multiplier used to obtain the correct distance units.
 def units_sphere_multiplier(units)
@@ -147,12 +147,12 @@ def units_sphere_multiplier(units)
 end
 
 # Returns the number of units per latitude degree.
-def units_per_latitude_degree(units)
-  units == :miles ? MILES_PER_LATITUDE_DEGREE : KMS_PER_LATITUDE_DEGREE
-end
+# def units_per_latitude_degree(units)
+#   units == :miles ? MILES_PER_LATITUDE_DEGREE : KMS_PER_LATITUDE_DEGREE
+# end
 
 # Returns the number units per longitude degree.
-def units_per_longitude_degree(lat, units)
-  miles_per_longitude_degree = (LATITUDE_DEGREES * Math.cos(lat * PI_DIV_RAD)).abs
-  units == :miles ? miles_per_longitude_degree : miles_per_longitude_degree * KMS_PER_MILE
-end  
+# def units_per_longitude_degree(lat, units)
+#   miles_per_longitude_degree = (LATITUDE_DEGREES * Math.cos(lat * PI_DIV_RAD)).abs
+#   units == :miles ? miles_per_longitude_degree : miles_per_longitude_degree * KMS_PER_MILE
+# end  
