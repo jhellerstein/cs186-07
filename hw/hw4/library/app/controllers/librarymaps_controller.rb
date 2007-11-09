@@ -15,9 +15,9 @@ class LibrarymapsController < ApplicationController
     end
 
     # Retrieve the list of libraries for the Select (Drop Down) Box
-    # "@" preceeding a variable name indicates an instance variable.
+    # "@" preceding a variable name indicates an instance variable.
     # Instance variables can be passed to views, whereas
-    # local variables (variable names without preceeding "@") cannot
+    # local variables (variable names without preceding "@") cannot
     # be passed to views.
     @alllibraries = Array.new 
     alllibraries1 = Library.find(:all, :order => "city,lname")
@@ -56,7 +56,13 @@ class LibrarymapsController < ApplicationController
                                   :title => libraryname, 
                                   :info_window => libraryname))
 
-    # Get all the authors.
+    # The following code fetches all the authors, geocodes their birthplaces,
+    # computes distance to the library, sorts by distance, and plots the
+    # top 15 closest.  This chunk is not going to scale well as we 
+    # increase the number of authors!
+
+    # Suck all the authors out of the database into a Ruby array, and
+    # loop through them.
     @authors = Array.new
     results = Author.find(:all)
     results.each do |result|
@@ -69,22 +75,26 @@ class LibrarymapsController < ApplicationController
       # Calculate the author's birthplace's distance from the library
       if geoloc.status == Geocoding::GEO_SUCCESS
         authlatlon = geoloc[0].latlon
-        # Distances recalculated from a relativley stable  set of libraries.
+        # Distances recalculated from a relatively stable  set of libraries.
         # This is a good candidate for caching.
         dist = distance_between(authlatlon,liblatlon).floor
-        @map.overlay_init(GMarker.new(geoloc[0].latlon,
-                                      :title => result.name, 
-                                      :info_window => "#{result.name} says:<br> I am #{dist} miles away<br> from #{@mylibrary.lname}"))
-        @authors << [result.name,result.bplace,dist]
+        @authors << [result.name,result.bplace,dist,authlatlon]
       end
     end
 
     # Sort authors in place by dist.  "sort!" means in place.
     @authors.sort! {|x,y| x[2] <=> y[2] }
+    # truncate the array to just the top 10
+    @authors = @authors[0..9]
 
+    @authors.each do |a|
+        @map.overlay_init(GMarker.new(a[3],
+                                      :title => a[0],
+                                      :info_window => "#{a[0]} says:<br> I am #{a[2]} miles away<br> from #{@mylibrary.lname}"))
+    end
     # Measure speed of server-side operation.
-    # Typical times w/  RPC: 3.5 seconds
-    # Typical times w/o RPC: 0.3 seconds
+    # Typical times w/  RPC on 17 authors: 3.5 seconds
+    # Typical times w/o RPC on 17 authors: 0.3 seconds
     # Rhombus server fluctuations will cause this value to vary.
     endtime = Time.now
     @elapsedtime = endtime - starttime
