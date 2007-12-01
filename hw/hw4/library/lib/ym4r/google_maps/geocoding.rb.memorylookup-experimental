@@ -36,11 +36,14 @@ module Ym4r
 "Berlin" => [52.52348,13.411494],
 "California" => [37.269175,-119.306607],
 "Boston" => [42.35888,-71.05682],
-"L.A." => [19.85627,102.495496],
+"L.A." => [ 34.053290, -118.245009 ],
+"Berkeley" => [37.869505, -122.270499],
+"San Francisco" => [37.779160, -122.420049],
       }
       
       #Gets placemarks by querying the Google Maps Geocoding service with the +request+ string
       def self.get(request)
+        puts "**************** REQUEST " + request + " ************* "
         if BIG_HASH[request]
           placemarks = Placemarks.new(request,GEO_SUCCESS)
           placemarks << Geocoding::Placemark.new(request,
