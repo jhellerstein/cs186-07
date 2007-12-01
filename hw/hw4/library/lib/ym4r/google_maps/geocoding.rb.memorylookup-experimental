@@ -40,6 +40,8 @@ module Ym4r
 "Berkeley" => [37.869505, -122.270499],
 "San Francisco" => [37.779160, -122.420049],
       }
+
+
       
       #Gets placemarks by querying the Google Maps Geocoding service with the +request+ string
       def self.get(request)
@@ -54,12 +56,12 @@ module Ym4r
                                                  "", #data_dependent_locality.text
                                                  "", #data_thoroughfare.text
                                                  "", #data_postal_code.text
-                                                 BIG_HASH[request][0],
-                                                 BIG_HASH[request][1])
+                                                 BIG_HASH[request][1],
+                                                 BIG_HASH[request][0])
         else
           placemarks = Placemarks.new(request,GEO_UNKNOWN_ADDRESS)          
         end
-        sleep 1
+        sleep 0.1
         placemarks
       end
       def self.getx(request,options = {})        
